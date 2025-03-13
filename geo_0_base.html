@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+    <!-- look-at component : https://github.com/supermedium/superframe/tree/master/components/look-at/ -->
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+
+    <style>
+        #info { position: absolute; bottom: 20px; left: 20px;
+            font-size: 1em; background-color: white;}
+    </style>
+
+  </head>
+
+  <body style="margin: 0; overflow: hidden;">
+    <p id="info"><b>cherchez une boule jaune, un cube rouge et un texte dans l'espace</b>
+        <br>- sur un ordinateur : cherchez dans l'espace avec la main (souris)
+        <br>- avec un smartphone (conseillé) : tournez l'écran autour de vous (mode paysage)
+    </p>
+    <a-scene embedded
+             arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;"
+             vr-mode-ui="enabled: false">
+             <!-- stat = donne des statistiques de performances (exp : fps, ...) -->
+             <!-- embedded isole l'AR du CSS de la page -->
+             <!-- arjs : trackingMethod : best; = choisit méthode de tracking selon matériel -->
+             <!-- arjs : debugUIEnabled: false; = masque le panneau de debug -->
+             <!-- arjs : sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; = choix de résolution selon webcam -->
+             <!-- vr-mode-ui : true = VR, false = AR -->
+
+        <!-- ATTENTION : le résultat n'est pas toujours identique car la localisation GPS peut varier -->
+
+        <a-box position='0 0 0' material='color: red;'
+               scale="0.5 0.5 0.5" rotation="45 45 45" position="0 1 0"
+               look-at="[gps-camera]"
+               gps-entity-place="latitude: 48.85065; longitude: 2.38396;">
+        </a-box>
+
+        <a-text value="Hello, World !"
+                look-at="[gps-camera]"
+                scale="2 2 2" position="0 1 0"
+                gps-entity-place="latitude: 48.85067; longitude: 2.38396;">
+        </a-text>
+        <!-- position : seul le paramètre en y est valide = altitude -->
+
+        <a-sphere position="0 1.5 0"
+                  material="color: yellow;"
+                  scale="0.1 0.1 0.1"
+                  gps-entity-place="latitude: 48.85067; longitude: 2.38398;">
+        </a-shere>
+
+      <!-- gps-camera : permet la localisation gps -->
+      <!-- rotation-reader : permet de capturer les événements de rotation -->
+      <!-- https://aframe.io/docs/0.9.0/components/camera.html#reading-position-or-rotation-of-the-camera    -->
+      <!-- <a-camera gps-camera rotation-reader gpsMinDistance="5"> </a-camera> -->
+      <a-camera gps-camera='gpsMinDistance: 5' rotation-readerlook-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'> </a-camera>
+    </a-scene>
+  </body>
+</html>
