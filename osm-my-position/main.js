@@ -15,7 +15,8 @@
 // ]
 
 let somePlaces = [
-  { lonlat:[2.295659, 48.83338] }, 		
+  { lonlat:[2.295659, 48.83338] }, 	
+  { lonlat:[2.295659, 48.83318] }, 	
 ]
 
 function init() {
